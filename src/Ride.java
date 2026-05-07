@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Ride {
 
     private String name;
@@ -36,5 +38,17 @@ public class Ride {
         return name + " - Wait: " + waitTime +
                 " mins, Thrill: " + thrillLevel +
                 ", Status: " + status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Ride ride = (Ride) o;
+        return waitTime == ride.waitTime && thrillLevel == ride.thrillLevel && Objects.equals(name, ride.name) && Objects.equals(status, ride.status);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, waitTime, thrillLevel, status);
     }
 }

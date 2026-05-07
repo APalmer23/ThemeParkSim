@@ -9,7 +9,7 @@ public class ThemeParkTracker {
     }
 
     public void addRide(Ride ride) {
-        rides.set(rides.size(), ride);
+        rides.add(ride);
     }
 
     public Ride getRide(int index) {
@@ -20,9 +20,13 @@ public class ThemeParkTracker {
         return rides.get(index);
     }
 
+    public ArrayList<Ride> getRides(){
+        return rides;
+    }
+
     public void removeClosedRides() {
-        for (int i = 0; i < rides.size(); i++) {
-            if (rides.get(i).getStatus() == "closed") {
+        for (int i = rides.size()-1; i >= 0; i--) {
+            if (rides.get(i).getStatus().equals( "closed")) {
                 rides.remove(i);
             }
         }
@@ -30,7 +34,7 @@ public class ThemeParkTracker {
 
     public void printRide(String name) {
         for (Ride ride : rides) {
-            if (ride.getName() == name) {
+            if (ride.getName().equals(name)) {
                 System.out.println(ride);
             }
         }
@@ -43,7 +47,7 @@ public class ThemeParkTracker {
     }
 
     public void printAllRides() {
-        for (int i = 0; i < rides.size() - 1; i++) {
+        for (int i = 0; i < rides.size(); i++) {
             System.out.println(rides.get(i));
         }
     }
@@ -67,16 +71,13 @@ public class ThemeParkTracker {
     }
 
     public String findRideStatus(String rideName) {
-
+        if (rides.isEmpty()){return "No rides in tracker";}
         for (Ride ride : rides) {
 
-            if (ride.getName() == rideName) {
+            if (ride.getName().equals(rideName)) {
                 return ride.getStatus();
-            } else {
-                return "Ride not found";
             }
         }
-
-        return "No rides in tracker";
+        return "Ride not found";
     }
 }
